@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResumeFit</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="app">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="headerIcon">🎯</div>
+        <div class="headerText">
+          <div class="title">ResumeFit</div>
+          <div class="subtitle">Know which resume wins — before you apply.</div>
+        </div>
+      </header>
+
+      <!-- Resumes card -->
+      <div class="card">
+        <div class="label">📁 Your Resumes</div>
+
+        <!-- Empty state -->
+        <div id="emptyResumeState" class="emptyState hidden">
+          <div class="emptyIcon">📋</div>
+          <div class="emptyTitle">No resumes added yet</div>
+          <div class="emptyDesc">Add your tailored resumes and ResumeFit will pick the best one for every job.</div>
+        </div>
+
+        <!-- Controls -->
+        <div id="resumeControls" class="hidden">
+          <div class="row">
+            <select id="resumeSelect"></select>
+            <button class="btn btnPrimary" id="editResumeBtn">✏️ Edit</button>
+            <button class="btn btnDanger" id="deleteResumeBtn">🗑 Delete</button>
+          </div>
+          <div class="resumeCount" id="resumeCount"></div>
+        </div>
+
+        <!-- Add -->
+        <div style="margin-top:10px">
+          <button class="btn btnPrimary" id="addResumeBtn">＋ Add a Resume</button>
+        </div>
+
+        <div class="hint">💡 Name by role — e.g. "Frontend", "Backend", "ML"</div>
+
+        <!-- Editor (hidden) -->
+        <div id="editor" class="editor hidden">
+          <div class="editorHead">
+            <div class="editorHeadTitle" id="editorTitle">✏️ Add Resume</div>
+            <button class="btn" id="closeEditorBtn" style="padding:4px 10px;font-size:11px">✕ Close</button>
+          </div>
+          <div class="editorFields">
+            <input id="resumeName" class="input" placeholder="e.g. Machine Learning, Frontend, SDET…" />
+            <textarea id="resumeText" class="textarea textareaTall" placeholder="Paste your full resume text here. The more detail, the better the match."></textarea>
+          </div>
+          <div class="editorActions">
+            <button class="btn btnPrimary" id="saveResumeBtn">💾 Save Resume</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Match card -->
+      <div class="card">
+        <div class="label">🔍 Job Match</div>
+
+        <button class="btn btnAnalyze" id="analyzeBtn">⚡ Find My Best Resume</button>
+
+        <div class="jdMeta" id="jdMeta"></div>
+
+        <!-- Result -->
+        <div class="resultArea" id="resultCard">
+          <div id="resultMain" class="resultEmpty">Ready when you are.</div>
+          <div id="resultSub" class="resultBy">Navigate to a job posting, then hit the button above.</div>
+          <div id="pillContainer"></div>
+
+          <div class="divider"></div>
+
+          <div class="whyLabel">🧠 Why This Resume?</div>
+          <ul class="whyList" id="whyList">
+            <li class="empty">
+              <span class="bullet"></span>
+              <span>Your match breakdown will appear here after analysis.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <span class="footerText">⚙️ v1 · Skill Overlap Engine</span>
+        <span class="footerText">🔒 Fully local · No Data Sent</span>
+      </footer>
+
+    </div>
+    <script src="utils.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
