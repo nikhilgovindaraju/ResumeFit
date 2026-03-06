@@ -215,10 +215,25 @@ async function getActiveTab() {
   return tabs[0];
 }
 
+// ── UPDATED: inject content.js on-demand instead of relying on content_scripts ──
+// This avoids the broad host permissions warning from Chrome Web Store.
 async function requestJobText(tabId) {
+  try {
+    // Inject content.js into the active tab on demand
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      files: ["content.js"]
+    });
+  } catch (err) {
+    // Script may already be injected — that's fine, continue
+  }
+
   return new Promise(resolve => {
     chrome.tabs.sendMessage(tabId, { type: "GET_JOB_TEXT" }, response => {
-      if (chrome.runtime.lastError) { resolve({ ok: false, error: chrome.runtime.lastError.message }); return; }
+      if (chrome.runtime.lastError) {
+        resolve({ ok: false, error: chrome.runtime.lastError.message });
+        return;
+      }
       resolve(response);
     });
   });
