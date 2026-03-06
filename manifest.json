@@ -1,30 +1,38 @@
 {
-    "manifest_version": 3,
-    "name": "ResumeFit",
-    "description": "Instantly match your best resume to any job posting. Paste your resumes once, get the right pick every time.",
-    "version": "1.0",
-    "permissions": ["storage", "activeTab", "scripting"],
-    "host_permissions": ["<all_urls>"],
-    "icons": {
-      "16":  "icons/icon16.png",
-      "32":  "icons/icon32.png",
-      "48":  "icons/icon48.png",
-      "128": "icons/icon128.png"
-    },
-    "action": {
-      "default_popup": "popup.html",
-      "default_title": "ResumeFit — Find your best resume",
-      "default_icon": {
-        "16":  "icons/icon16.png",
-        "32":  "icons/icon32.png",
-        "48":  "icons/icon48.png",
-        "128": "icons/icon128.png"
-      }
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-      }
-    ]
-  }
+  "manifest_version": 3,
+  "name": "ResumeFit",
+  "description": "Pick the best resume for every job in one click.",
+  "version": "1.0",
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+
+  "host_permissions": [
+    "<all_urls>"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
