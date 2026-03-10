@@ -16,81 +16,262 @@
           <div class="title">ResumeFit</div>
           <div class="subtitle">Know which resume wins — before you apply.</div>
         </div>
+        <div class="aiBadge hidden" id="aiBadge">✦ AI</div>
       </header>
 
-      <!-- Resumes card -->
-      <div class="card">
-        <div class="label">📁 Your Resumes</div>
-
-        <!-- Empty state -->
-        <div id="emptyResumeState" class="emptyState hidden">
-          <div class="emptyIcon">📋</div>
-          <div class="emptyTitle">No resumes added yet</div>
-          <div class="emptyDesc">Add your tailored resumes and ResumeFit will pick the best one for every job.</div>
-        </div>
-
-        <!-- Controls -->
-        <div id="resumeControls" class="hidden">
-          <div class="row">
-            <select id="resumeSelect"></select>
-            <button class="btn btnPrimary" id="editResumeBtn">✏️ Edit</button>
-            <button class="btn btnDanger" id="deleteResumeBtn">🗑 Delete</button>
-          </div>
-          <div class="resumeCount" id="resumeCount"></div>
-        </div>
-
-        <!-- Add -->
-        <div style="margin-top:10px">
-          <button class="btn btnPrimary" id="addResumeBtn">＋ Add a Resume</button>
-        </div>
-
-        <div class="hint">💡 Name by role — e.g. "Frontend", "Backend", "ML"</div>
-
-        <!-- Editor (hidden) -->
-        <div id="editor" class="editor hidden">
-          <div class="editorHead">
-            <div class="editorHeadTitle" id="editorTitle">✏️ Add Resume</div>
-            <button class="btn" id="closeEditorBtn" style="padding:4px 10px;font-size:11px">✕ Close</button>
-          </div>
-          <div class="editorFields">
-            <input id="resumeName" class="input" placeholder="e.g. Machine Learning, Frontend, SDET…" />
-            <textarea id="resumeText" class="textarea textareaTall" placeholder="Paste your full resume text here. The more detail, the better the match."></textarea>
-          </div>
-          <div class="editorActions">
-            <button class="btn btnPrimary" id="saveResumeBtn">💾 Save Resume</button>
-          </div>
-        </div>
+      <!-- Tabs — same style as floating panel -->
+      <div class="tabs">
+        <button class="tab active" data-tab="match">Match</button>
+        <button class="tab" data-tab="tracker">Tracker</button>
+        <button class="tab" data-tab="info">Info</button>
+        <button class="tab" data-tab="settings">Settings</button>
       </div>
 
-      <!-- Job Match card -->
-      <div class="card">
-        <div class="label">🔍 Job Match</div>
+      <!-- ══════════════════════════════════════ -->
+      <!-- TAB: MATCH                             -->
+      <!-- ══════════════════════════════════════ -->
+      <div class="tabPane active" id="tab-match">
 
-        <button class="btn btnAnalyze" id="analyzeBtn">⚡ Find My Best Resume</button>
+        <!-- Resumes card -->
+        <div class="card">
+          <div class="label">Your Resumes</div>
 
-        <div class="jdMeta" id="jdMeta"></div>
+          <div id="emptyResumeState" class="emptyState hidden">
+            <div class="emptyIcon">📋</div>
+            <div class="emptyTitle">No resumes added yet</div>
+            <div class="emptyDesc">Add your tailored resumes and ResumeFit will pick the best one for every job.</div>
+          </div>
 
-        <!-- Result -->
-        <div class="resultArea" id="resultCard">
-          <div id="resultMain" class="resultEmpty">Ready when you are.</div>
-          <div id="resultSub" class="resultBy">Navigate to a job posting, then hit the button above.</div>
-          <div id="pillContainer"></div>
+          <div id="resumeControls" class="hidden">
+            <div class="row">
+              <select id="resumeSelect"></select>
+              <button class="btn btnPrimary" id="editResumeBtn">✏️</button>
+              <button class="btn btnDanger" id="deleteResumeBtn">🗑</button>
+            </div>
+            <div class="resumeCount" id="resumeCount"></div>
+          </div>
 
-          <div class="divider"></div>
+          <div style="margin-top:10px">
+            <button class="btn btnPrimary" id="addResumeBtn">＋ Add a resume</button>
+          </div>
+          <div class="hint">💡 Name by role — e.g. "ML Engineer", "Backend", "PM"</div>
 
-          <div class="whyLabel">🧠 Why This Resume?</div>
-          <ul class="whyList" id="whyList">
-            <li class="empty">
-              <span class="bullet"></span>
-              <span>Your match breakdown will appear here after analysis.</span>
-            </li>
-          </ul>
+          <!-- Editor -->
+          <div id="editor" class="editor hidden">
+            <div class="editorHead">
+              <div class="editorHeadTitle" id="editorTitle">✏️ Add resume</div>
+              <button class="btn" id="closeEditorBtn" style="padding:4px 10px;font-size:11px">✕</button>
+            </div>
+            <div class="editorFields">
+              <input id="resumeName" class="input" placeholder="e.g. Machine Learning, Frontend, SDET…" />
+              <textarea id="resumeText" class="textarea textareaTall" placeholder="Paste your full resume text here. The more detail, the better the match."></textarea>
+            </div>
+            <div class="editorActions">
+              <button class="btn btnPrimary" id="saveResumeBtn">💾 Save resume</button>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <!-- Job Match card -->
+        <div class="card">
+          <div class="label">Job Match</div>
+          <button class="btn btnAnalyze" id="analyzeBtn">⚡ Find My Best Resume</button>
+          <div class="jdMeta" id="jdMeta"></div>
+
+          <div class="resultArea" id="resultCard">
+            <div id="resultMain" class="resultEmpty">Ready when you are.</div>
+            <div id="resultSub" class="resultBy">Navigate to a job posting, then hit the button above.</div>
+            <div id="pillContainer"></div>
+
+            <div class="divider"></div>
+
+            <div class="whyLabel">Why this resume</div>
+            <ul class="whyList" id="whyList">
+              <li class="empty">
+                <span class="bullet"></span>
+                <span>Your match breakdown will appear here after analysis.</span>
+              </li>
+            </ul>
+
+            <!-- AI advice block -->
+            <div id="aiAdviceBlock" class="hidden">
+              <div class="divider"></div>
+              <div class="whyLabel">✦ AI Suggestions</div>
+              <div id="aiAdviceContent" class="aiAdvice"></div>
+            </div>
+
+            <!-- Log application -->
+            <div id="logAppBlock" class="hidden" style="margin-top:14px">
+              <button class="btn btnLog" id="logAppBtn">＋ Log this application</button>
+              <div id="logAppStatus" class="hint" style="margin-top:6px;display:none"></div>
+            </div>
+
+            <!-- Quick Copy bar — appears after analysis if Info data saved -->
+            <div id="matchQuickBar" style="display:none;margin-top:14px">
+              <div class="label" style="margin-bottom:8px">Quick Copy</div>
+              <div class="qcIconRow" id="qcIconRow"></div>
+            </div>
+
+            <!-- AI nudge (shown only when no AI key set, after analysis) -->
+            <div id="aiNudge" class="aiNudge hidden">
+              ✦ <span>Get AI-powered tips for this job — <strong>add your API key in Settings</strong></span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tab-match -->
+
+      <!-- ══════════════════════════════════════ -->
+      <!-- TAB: TRACKER                           -->
+      <!-- ══════════════════════════════════════ -->
+      <div class="tabPane hidden" id="tab-tracker">
+        <div class="card">
+          <div class="trackerHeader">
+            <div class="label" style="margin-bottom:0">Applications</div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <select id="trackerFilter" class="input" style="width:auto;padding:5px 28px 5px 10px;font-size:11.5px">
+                <option value="24h">Last 24 hours</option>
+                <option value="7d">Last 7 days</option>
+                <option value="all">All time</option>
+              </select>
+              <button class="btn" id="exportCsvBtn" title="Export to CSV" style="padding:5px 10px;font-size:12px">⬇ CSV</button>
+            </div>
+          </div>
+
+          <div style="height:10px"></div>
+
+          <div id="trackerEmpty" class="emptyState">
+            <div class="emptyIcon">📭</div>
+            <div class="emptyTitle">No applications logged yet</div>
+            <div class="emptyDesc">After analyzing a job, click "Log this application" to track it here.</div>
+          </div>
+
+          <div id="trackerStats" class="trackerStats hidden"></div>
+          <div id="trackerList" class="trackerList hidden"></div>
+        </div>
+      </div><!-- /tab-tracker -->
+
+
+      <!-- ══════════════════════════════════════ -->
+      <!-- TAB: INFO                              -->
+      <!-- ══════════════════════════════════════ -->
+      <div class="tabPane hidden" id="tab-info">
+
+        <!-- Fields form (Quick Copy bar moved to Match tab) -->
+        <div class="card">
+          <div class="label">Your Details</div>
+          <div class="infoDesc">Saved locally — one click to copy when filling applications.</div>
+
+          <div class="infoFields">
+            <div class="infoField">
+              <label class="settingLabel">Email</label>
+              <input id="info-email" class="input" type="email" placeholder="you@email.com" style="margin-top:5px" />
+            </div>
+            <div class="infoField">
+              <label class="settingLabel">Phone</label>
+              <input id="info-phone" class="input" type="tel" placeholder="+1 (555) 000-0000" style="margin-top:5px" />
+            </div>
+            <div class="infoField">
+              <label class="settingLabel">LinkedIn</label>
+              <input id="info-linkedin" class="input" type="url" placeholder="linkedin.com/in/yourname" style="margin-top:5px" />
+            </div>
+            <div class="infoField">
+              <label class="settingLabel">GitHub</label>
+              <input id="info-github" class="input" type="url" placeholder="github.com/yourname" style="margin-top:5px" />
+            </div>
+            <div class="infoField">
+              <label class="settingLabel">Portfolio</label>
+              <input id="info-portfolio" class="input" type="url" placeholder="yourportfolio.com" style="margin-top:5px" />
+            </div>
+            <div class="infoField">
+              <label class="settingLabel">Location</label>
+              <input id="info-location" class="input" type="text" placeholder="San Francisco, CA" style="margin-top:5px" />
+            </div>
+          </div>
+
+          <div style="margin-top:14px;display:flex;gap:8px">
+            <button class="btn btnPrimary" id="saveInfoBtn">💾 Save details</button>
+          </div>
+          <div id="infoStatus" class="hint" style="margin-top:8px"></div>
+        </div>
+
+      </div><!-- /tab-info -->
+
+      <!-- ══════════════════════════════════════ -->
+      <!-- TAB: SETTINGS                          -->
+      <!-- ══════════════════════════════════════ -->
+      <div class="tabPane hidden" id="tab-settings">
+        <div class="card">
+          <div class="label">AI Provider (optional)</div>
+          <div class="aiUpsell">
+            <div class="aiUpsellIcon">🧠</div>
+            <div>
+              <div class="aiUpsellTitle">ResumeFit works great without AI.</div>
+              <div class="aiUpsellDesc">
+                Connect your own key to get specific bullet points to add, keywords to highlight,
+                and suggestions tailored to each job. Your key is stored locally and sent directly to
+                the provider. We never see it.
+              </div>
+            </div>
+          </div>
+
+          <div class="settingRow" style="margin-top:14px">
+            <label class="settingLabel">Provider</label>
+            <select id="aiProvider" class="input" style="margin-top:5px">
+              <option value="none">No AI — keyword engine only (default)</option>
+              <option value="gemini">Gemini (Google) — free tier available ⭐</option>
+              <option value="claude">Claude (Anthropic)</option>
+              <option value="openai">OpenAI (GPT-4o)</option>
+            </select>
+          </div>
+
+          <div id="apiKeyRow" class="settingRow hidden" style="margin-top:12px">
+            <label class="settingLabel" id="apiKeyLabel">API Key</label>
+            <div class="keyInputRow">
+              <input id="apiKeyInput" class="input" type="password" placeholder="Paste your API key here…" style="margin-top:5px" />
+              <button class="btn" id="toggleKeyBtn" style="margin-top:5px;flex-shrink:0;padding:7px 10px">👁</button>
+            </div>
+            <div class="hint" id="apiKeyHint" style="margin-top:6px"></div>
+          </div>
+
+          <div style="margin-top:14px;display:flex;gap:8px">
+            <button class="btn btnPrimary" id="saveSettingsBtn">💾 Save</button>
+            <button class="btn btnDanger" id="clearSettingsBtn">Clear key</button>
+          </div>
+          <div id="settingsStatus" class="hint" style="margin-top:10px"></div>
+        </div>
+
+        <div class="card" style="margin-top:0">
+          <div class="label">n8n Automation (optional)</div>
+          <div class="settingDesc" style="margin-bottom:12px">
+            Every time you log a job application, ResumeFit will ping your n8n webhook —
+            automatically syncing to Google Sheets, Notion, Airtable, or anywhere else.
+            <br><br>
+            <strong>How to set up:</strong> In n8n → New Workflow → Webhook node → copy the URL → paste below.
+          </div>
+          <label class="settingLabel">Webhook URL</label>
+          <input id="n8nWebhook" class="input" type="url" placeholder="https://your-n8n.app/webhook/xyz" style="margin-top:5px" />
+          <div class="hint">Fires on every ＋ Log click with: title, company, resume, score, URL, date.</div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button class="btn btnPrimary" id="saveN8nBtn">💾 Save webhook</button>
+            <button class="btn btnDanger" id="clearN8nBtn">Clear</button>
+          </div>
+          <div id="n8nStatus" class="hint" style="margin-top:8px"></div>
+        </div>
+
+        <div class="card" style="margin-top:0">
+          <div class="label">Privacy</div>
+          <div class="settingDesc">
+            ResumeFit is fully local. Resume text and job descriptions never leave your
+            device except when sent directly to your chosen AI provider using your own key.
+            No analytics. No tracking. No servers.
+          </div>
+        </div>
+      </div><!-- /tab-settings -->
 
       <footer class="footer">
-        <span class="footerText">⚙️ v1 · Skill Overlap Engine</span>
-        <span class="footerText">🔒 Fully local · No Data Sent</span>
+        <span class="footerText" id="footerEngine">⚙️ v3 · keyword engine</span>
+        <span class="footerText">🔒 fully local</span>
       </footer>
 
     </div>
