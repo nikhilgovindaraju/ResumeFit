@@ -1,5 +1,5 @@
-/* popup.css — ResumeFit v2 */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+/* popup.css — ResumeFit v3.1 */
+
 
 :root {
   --bg:       #d1d5db;
@@ -35,7 +35,7 @@ body {
   width: 400px;
   background: var(--bg);
   color: var(--t1);
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 13px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -80,7 +80,7 @@ body {
 .aiBadge {
   background: linear-gradient(135deg, #5b4ef8, #8b5cf6);
   color: #fff;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   font-weight: 500;
   padding: 3px 8px;
@@ -88,7 +88,7 @@ body {
   flex-shrink: 0;
 }
 
-/* ── Tabs — underline style matching floating panel ── */
+/* ── Tabs — underline style ── */
 .tabs {
   display: flex;
   background: var(--card);
@@ -106,7 +106,7 @@ body {
   border-bottom: 2px solid transparent;
   background: transparent;
   color: var(--t3);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 11.5px;
   font-weight: 700;
   cursor: pointer;
@@ -125,97 +125,63 @@ body {
 
 /* Cards below tabs connect flush */
 .tabs + .tabPane .card:first-child,
-.tabs + .tabPane.active .card:first-child {
+.tabs + .tabPane.active .card:first-child,
+.tabs + .injectBanner + .tabPane .card:first-child,
+.tabs + .injectBanner + .tabPane.active .card:first-child {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top: none;
 }
 
-/* ── Tab panes ── */
-.tabPane { display: flex; flex-direction: column; gap: 8px; }
-.tabPane.hidden { display: none; }
-/* ══════════════════════════════════════
-   INFO TAB
-   ══════════════════════════════════════ */
-.infoDesc {
-  font-size: 12px;
-  color: var(--t3);
-  margin-bottom: 14px;
-  line-height: 1.5;
-}
-
-.infoFields { display: flex; flex-direction: column; gap: 11px; }
-.infoField  { display: flex; flex-direction: column; }
-
-/* Quick Copy row — icon buttons */
-/* ── Quick Copy icon bar ── */
-.qcIconRow {
+/* ── Inject banner (shown on non-job pages) ── */
+.injectBanner {
   display: flex;
-  gap: 8px;
-  justify-content: flex-start;
-}
-
-/* Each icon button: square with icon + label underneath */
-.qcIconBtn {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 0;
+  padding: 9px 14px;
+  margin: 0;
+}
+
+.injectBannerText {
+  font-size: 11.5px;
+  color: #92400e;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.btnInject {
+  display: inline-flex;
+  align-items: center;
   gap: 5px;
-  width: 60px;
-  padding: 10px 6px 8px;
-  border-radius: var(--rsm);
-  border: 1px solid var(--border);
-  background: var(--s2);
-  color: var(--t2);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #f59e0b;
+  background: #fef3c7;
+  color: #92400e;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.13s;
+  white-space: nowrap;
+  transition: all .13s;
   flex-shrink: 0;
-  position: relative;
 }
-
-.qcIconBtn:hover {
-  background: var(--accentLight);
-  border-color: #c7d2fe;
-  color: var(--accentText);
-}
-
-.qcIconBtn.copied {
+.btnInject:hover { background: #fde68a; border-color: #d97706; }
+.btnInject.injected {
   background: var(--greenBg);
   border-color: #86efac;
   color: var(--green);
 }
 
-.qcIconBtn svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
+/* ── Tab panes ── */
+.tabPane { display: flex; flex-direction: column; gap: 8px; }
+.tabPane.hidden { display: none; }
 
-.qcIconLabel {
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  line-height: 1;
-}
-
-/* Tooltip on hover */
-.qcIconBtn[title]:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: #111827;
-  color: #fff;
-  font-size: 10px;
-  padding: 3px 8px;
-  border-radius: 5px;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
+/* ── Hidden utility ── */
 .hidden { display: none !important; }
 
 /* ── Cards ── */
@@ -228,7 +194,7 @@ body {
 
 /* ── Section label ── */
 .label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.10em;
@@ -248,7 +214,7 @@ select, .input, .textarea {
   border-radius: var(--rsm);
   color: var(--t1);
   padding: 9px 12px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 13px;
   font-weight: 500;
   outline: none;
@@ -280,7 +246,7 @@ select:focus, .input:focus, .textarea:focus {
   gap: 5px;
   padding: 7px 13px;
   border-radius: var(--rsm);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
@@ -347,7 +313,7 @@ select:focus, .input:focus, .textarea:focus {
 
 /* ── Resume count ── */
 .resumeCount {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10.5px;
   color: var(--t3);
   text-align: right;
@@ -363,7 +329,7 @@ select:focus, .input:focus, .textarea:focus {
   gap: 5px;
   padding: 3px 10px;
   border-radius: 20px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10.5px;
   font-weight: 500;
   border: 1px solid;
@@ -395,7 +361,7 @@ select:focus, .input:focus, .textarea:focus {
   margin-top: 10px;
   padding: 4px 11px 4px 8px;
   border-radius: 20px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 11px;
   font-weight: 500;
   border: 1px solid;
@@ -415,7 +381,7 @@ select:focus, .input:focus, .textarea:focus {
 
 /* ── Why section ── */
 .whyLabel {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.10em;
@@ -451,7 +417,7 @@ select:focus, .input:focus, .textarea:focus {
 .chip {
   display: inline-flex;
   align-items: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10.5px;
   padding: 2px 7px;
   border-radius: 20px;
@@ -547,7 +513,7 @@ select:focus, .input:focus, .textarea:focus {
 }
 
 .statLabel {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 9.5px;
   color: var(--t3);
   margin-top: 2px;
@@ -589,7 +555,7 @@ select:focus, .input:focus, .textarea:focus {
 }
 
 .appResume {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   background: var(--accentLight);
   color: var(--accentText);
@@ -599,13 +565,13 @@ select:focus, .input:focus, .textarea:focus {
 }
 
 .appDate {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   color: var(--t3);
 }
 
 .appScore {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   padding: 1px 7px;
   border-radius: 20px;
@@ -629,6 +595,79 @@ select:focus, .input:focus, .textarea:focus {
 }
 .appDeleteBtn:hover { color: var(--red); background: var(--redBg); }
 
+/* ── Info tab ── */
+.infoDesc {
+  font-size: 12px;
+  color: var(--t3);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.infoFields { display: flex; flex-direction: column; gap: 11px; }
+.infoField  { display: flex; flex-direction: column; }
+
+/* ── Quick Copy icon bar ── */
+.qcIconRow {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+.qcIconBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 60px;
+  padding: 10px 6px 8px;
+  border-radius: var(--rsm);
+  border: 1px solid var(--border);
+  background: var(--s2);
+  color: var(--t2);
+  cursor: pointer;
+  transition: all 0.13s;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.qcIconBtn:hover {
+  background: var(--accentLight);
+  border-color: #c7d2fe;
+  color: var(--accentText);
+}
+
+.qcIconBtn.copied {
+  background: var(--greenBg);
+  border-color: #86efac;
+  color: var(--green);
+}
+
+.qcIconBtn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.qcIconLabel {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.qcIconBtn[title]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111827;
+  color: #fff;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
 /* ── Settings ── */
 .settingDesc {
   font-size: 12px;
@@ -636,7 +675,6 @@ select:focus, .input:focus, .textarea:focus {
   line-height: 1.55;
 }
 
-/* AI upsell block */
 .aiUpsell {
   display: flex;
   gap: 11px;
@@ -663,7 +701,6 @@ select:focus, .input:focus, .textarea:focus {
   line-height: 1.5;
 }
 
-/* Subtle AI nudge below results */
 .aiNudge {
   margin-top: 12px;
   display: flex;
@@ -697,7 +734,7 @@ select:focus, .input:focus, .textarea:focus {
 .footer { display: flex; justify-content: space-between; padding: 0 2px 2px; }
 
 .footerText {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 10px;
   color: var(--t3);
 }

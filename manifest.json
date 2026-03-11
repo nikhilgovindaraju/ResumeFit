@@ -1,67 +1,74 @@
 {
   "manifest_version": 3,
   "name": "ResumeFit",
-  "description": "Analyzes job postings and recommends your best matching resume. Fully local — no data sent anywhere.",
-  "version": "3.0",
+  "description": "Analyzes job postings and recommends your best matching resume. Fully local \u2014 no data sent anywhere.",
+  "version": "3.1",
   "icons": {
-    "16":  "icons/icon16.png",
-    "32":  "icons/icon32.png",
-    "48":  "icons/icon48.png",
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16":  "icons/icon16.png",
-      "32":  "icons/icon32.png",
-      "48":  "icons/icon48.png"
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
     }
   },
-  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
   "host_permissions": [
     "https://*/*",
     "http://*/*"
   ],
   "content_scripts": [
     {
-      "matches": ["https://*/*", "http://*/*"],
-      "exclude_matches": [
-        "https://mail.google.com/*",
-        "https://docs.google.com/*",
-        "https://drive.google.com/*",
-        "https://calendar.google.com/*",
-        "https://accounts.google.com/*",
-        "https://www.google.com/search*",
-        "https://github.com/*",
-        "https://stackoverflow.com/*",
-        "https://twitter.com/*",
-        "https://x.com/*",
-        "https://facebook.com/*",
-        "https://www.facebook.com/*",
-        "https://instagram.com/*",
-        "https://www.instagram.com/*",
-        "https://youtube.com/*",
-        "https://www.youtube.com/*",
-        "https://reddit.com/*",
-        "https://www.reddit.com/*",
-        "https://wikipedia.org/*",
-        "https://en.wikipedia.org/*",
-        "https://amazon.com/*",
-        "https://www.amazon.com/*",
-        "https://netflix.com/*",
-        "https://www.netflix.com/*",
-        "https://chat.openai.com/*",
-        "https://claude.ai/*",
-        "https://gemini.google.com/*"
+      "matches": [
+        "https://*.linkedin.com/jobs/*",
+        "https://*.greenhouse.io/*",
+        "https://job-boards.greenhouse.io/*",
+        "https://boards.greenhouse.io/*",
+        "https://*.lever.co/*",
+        "https://*.ashbyhq.com/*",
+        "https://*.myworkdayjobs.com/*",
+        "https://*.workday.com/*",
+        "https://*.smartrecruiters.com/*",
+        "https://*.indeed.com/*",
+        "https://*.jobvite.com/*",
+        "https://*.icims.com/*",
+        "https://*.taleo.net/*",
+        "https://*.oraclecloud.com/hcmUI/*",
+        "https://*.rippling.com/jobs/*",
+        "https://*.wellfound.com/jobs/*",
+        "https://*.ycombinator.com/jobs/*",
+        "https://jobs.ycombinator.com/*",
+        "https://*.careers.microsoft.com/*",
+        "https://careers.google.com/*",
+        "https://*.amazon.jobs/*",
+        "https://*.meta.com/careers/*",
+        "https://*.apple.com/careers/*",
+        "https://*.netflix.com/jobs/*"
       ],
-      "js": ["floatingPanel.js"],
+      "js": [
+        "floatingpanel.js"
+      ],
       "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["floatingPanel.css", "icons/*"],
-      "matches": ["<all_urls>"]
+      "resources": [
+        "icons/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ]
 }

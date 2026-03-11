@@ -1,9 +1,42 @@
 // floatingPanel.js — ResumeFit v3.1
 // Shadow DOM. Draggable FAB. 4 tabs: Match | Tracker | Info | Settings
-// UI consistent with popup: same tabs, same score layout, same icon copy bar, same Info form
+// Auto-injects on known job boards. Can also be manually injected from the popup.
 
 (function () {
     if (document.getElementById("rf-host")) return;
+
+    // ── Job-site guard ────────────────────────────────────────
+    // Auto-injection (via content_scripts) only fires on known job domains.
+    // Manual injection from the popup bypasses this via chrome.scripting,
+    // which sets rf_manual_inject = true before calling this script.
+    const KNOWN_JOB_PATTERNS = [
+      /linkedin\.com\/jobs/i,
+      /greenhouse\.io/i,
+      /lever\.co/i,
+      /ashbyhq\.com/i,
+      /myworkdayjobs\.com/i,
+      /workday\.com/i,
+      /smartrecruiters\.com/i,
+      /indeed\.com/i,
+      /jobvite\.com/i,
+      /icims\.com/i,
+      /taleo\.net/i,
+      /oraclecloud\.com\/hcmUI/i,
+      /rippling\.com\/jobs/i,
+      /wellfound\.com\/jobs/i,
+      /ycombinator\.com\/jobs/i,
+      /careers\.microsoft\.com/i,
+      /careers\.google\.com/i,
+      /amazon\.jobs/i,
+      /meta\.com\/careers/i,
+      /apple\.com\/careers/i,
+      /netflix\.com\/jobs/i,
+    ];
+
+    const isKnownJobPage = KNOWN_JOB_PATTERNS.some(p => p.test(location.href));
+    const isManualInject = window.__rf_manual_inject === true;
+
+    if (!isKnownJobPage && !isManualInject) return;
   
     const STORAGE_KEY   = "resume_selector_resumes_min_v1";
     const TRACKER_KEY   = "resumefit_applications_v1";
